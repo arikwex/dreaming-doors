@@ -1,0 +1,28 @@
+HITLIST
+=======
+
+- Art: Spray paint
+- Astronaut: Jet pack
+- Chef: Adds pots/pans platforms to world
+- Car: Speed Boost
+- Rabbit: Double Jump
+- Static: Nothing
+- Bird: glide
+- Balloon: fly upward
+- Money: trail of cash
+- Forest: places trees that occlude your view
+- Rain: it starts raining and floor physics changes 
+- Moon: Puts the moon in the scene (bright)
+- Ladder: Puts ladders in the scene
+- Library: bookshelf platforms / shortcuts
+- Nightclub: adds disco ball and lights
+- Music: large instruments + music change
+- Key: required to open final gate
+- Alcohol: Blurred vision
+- Birthday: Bouncy gift boxes + cakes
+- Ram: dash
+- Basketball: hoops + balls you can throw
+
+Render tech:
+- Render doorway to stencil 0x1, blend zero one
+- Render scene when stencil 0x1, blend default
