@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerScript : MonoBehaviour
+{
+    public Rigidbody body;
+    public Animator animator;
+
+    bool running = false;
+    float heading = 0;
+    float targetHeading = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float dT = Time.deltaTime;
+        float sx = getX();
+        float sy = getY();
+        float mag = Mathf.Sqrt(sx * sx + sy * sy);
+        if (mag > 0.3f) {
+            if (mag > 1) {
+                sx = sx / mag;
+                sy = sy / mag;
+            }
+            float SPEED = 15;
+            float k = 7;
+            running = true;
+            body.velocity += (
+                new Vector3(sx * SPEED, 0, sy * SPEED)
+                - new Vector3(body.velocity.x, 0, body.velocity.z)
+            ) * k * dT;
+            targetHeading = Mathf.Atan2(-sy, sx);
+        } else {
+            float k = 8;
+            running = false;
+            body.velocity += new Vector3(
+                (- body.velocity.x) * k * dT,
+                0,
+                (- body.velocity.z) * k * dT
+            );
+        }
+        animator.SetBool("running", running);
+        heading = rotateTowards(targetHeading, heading, 5.0f * dT);
+        transform.rotation = 
+            Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up);
+            // Quaternion.AngleAxis(10.0f, Vector3.forward);
+    }
+
+    Quaternion getHeading() {
+        return Quaternion.AngleAxis(heading * Mathf.Rad2Deg + 90, Vector3.up);
+    }
+
+    float rotateTowards(float a, float b, float maxT) {
+        float val = b + Mathf.Clamp(a - b, maxT, -maxT);
+        if (val > Mathf.PI) {
+            val -= Mathf.PI * 2;
+        }
+        if (val < -Mathf.PI) {
+            val += Mathf.PI * 2;
+        }
+        return val;
+    }
+
+    float getX() {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+            return -1;
+        }
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    float getY() {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
+            return 1;
+        }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
+            return -1;
+        }
+        return 0;
+    }
+}
