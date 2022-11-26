@@ -113,6 +113,11 @@ public class PlayerScript : MonoBehaviour
     public ParticleSystem grantParticles;
     public GameObject sprayItem;
 
+    public void requestGrant(Vector3 target) {
+        targetHeading = Mathf.Atan2(target.x - transform.position.x, target.z - transform.position.z);
+        animator.SetTrigger("grant");
+    }
+
     public void grant(GRANT g) {
         grantParticles.Play();
         if (g == GRANT.SPRAY) {

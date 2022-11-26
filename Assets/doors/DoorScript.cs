@@ -40,6 +40,7 @@ public class DoorScript : MonoBehaviour
     IEnumerator animateAcquire() {
         PlayerScript player = FindObjectOfType<PlayerScript>();
         initItemPos = item.transform.position;
+        player.requestGrant(initItemPos);
         float t = 0;
         while (t < 1.0f) {
             t += Time.deltaTime * 1.8f;
