@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         float dT = Time.deltaTime;
+
+        // Walking
         float sx = getX();
         float sy = getY();
         float mag = Mathf.Sqrt(sx * sx + sy * sy);
@@ -46,12 +48,19 @@ public class PlayerScript : MonoBehaviour
                 (- body.velocity.z) * k * dT
             );
         }
+
+        // Jumping
+        if (isJump()) {
+            body.velocity += Vector3.up * 25.0f;
+            animator.SetTrigger("jump");
+        }
+
         animator.SetBool("running", running);
         heading = angleClamp(heading + angleClamp(targetHeading - heading) * 9.0f * dT);
         tilt += (angleClamp(targetHeading - heading) - tilt) * 8.0f * dT;
         transform.rotation = 
             Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up)
-            * Quaternion.AngleAxis(-tilt * body.velocity.magnitude, Vector3.forward);
+            * Quaternion.AngleAxis(-tilt * body.velocity.magnitude * 1.0f, Vector3.forward);
     }
 
     Quaternion getHeading() {
@@ -86,5 +95,9 @@ public class PlayerScript : MonoBehaviour
             return -1;
         }
         return 0;
+    }
+
+    bool isJump() {
+        return Input.GetKeyDown(KeyCode.Space);
     }
 }
