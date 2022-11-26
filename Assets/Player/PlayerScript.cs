@@ -104,4 +104,19 @@ public class PlayerScript : MonoBehaviour
     bool isJump() {
         return Input.GetKeyDown(KeyCode.Space);
     }
+
+    public enum GRANT {
+        SPRAY = 0,
+        BUNNY = 1,
+    }
+    
+    public ParticleSystem grantParticles;
+    public GameObject sprayItem;
+
+    public void grant(GRANT g) {
+        grantParticles.Play();
+        if (g == GRANT.SPRAY) {
+            sprayItem.SetActive(true);
+        }
+    }
 }
