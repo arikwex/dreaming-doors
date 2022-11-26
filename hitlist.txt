@@ -1,30 +1,32 @@
 HITLIST
 =======
 
-- Camera needs phi axis limits
+Use abilities up over time.
+e.g. Rabbit grants you a double jump until next ability
 
-- Art: Spray paint
-- Astronaut: Jet pack
-- Chef: Adds pots/pans platforms to world
-- Car: Speed Boost
-- Rabbit: Double Jump
-- Static: Nothing
-- Bird: glide
+- Static: Nothing / Cancel existing powerup
+
+- Exit Door
+- [DONE] Art: Spray paint
+- Basketball: hoops + balls you can throw
 - Balloon: fly upward
-- Money: trail of cash
-- Forest: places trees that occlude your view
-- Rain: it starts raining and floor physics changes 
-- Moon: Puts the moon in the scene (bright)
-- Ladder: Puts ladders in the scene
 - Library: bookshelf platforms / shortcuts
-- Nightclub: adds disco ball and lights
+- Car: Speed Boost
+
+- Rabbit: Double Jump
+- Chef: Adds pots/pans platforms to world
+- Money: trail of cash
+- Moon: Puts the moon in the scene (bright)
 - Music: large instruments + music change
-- Key: required to open final gate
+
+- Rain: it starts raining and floor physics changes 
+- Forest: places trees that occlude your view
+- Astronaut: Jet pack
 - Alcohol: Blurred vision
+- Key: required to open final gate
+
+- Bird: glide
+- Ladder: Puts ladders in the scene
+- Nightclub: adds disco ball and lights
 - Birthday: Bouncy gift boxes + cakes
 - Ram: dash
-- Basketball: hoops + balls you can throw
-
-Render tech:
-- Render doorway to stencil 0x1, blend zero one
-- Render scene when stencil 0x1, blend default
