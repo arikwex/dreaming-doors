@@ -604,7 +604,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.28773582, b: 0.93225527, a: 1}
+      maxColor: {r: 1, g: 0.9652598, b: 0.28627455, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -8525,6 +8525,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654527272}
     m_Modifications:
+    - target: {fileID: 1738927575, guid: a06f1c2c9270a4266afbdb61302b613e, type: 3}
+      propertyPath: m_Drag
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 5307870569517074594, guid: a06f1c2c9270a4266afbdb61302b613e, type: 3}
       propertyPath: m_RootOrder
       value: 1

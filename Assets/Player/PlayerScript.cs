@@ -31,9 +31,7 @@ public class PlayerScript : MonoBehaviour
         animator.SetBool("running", running);
         heading = angleClamp(heading + angleClamp(targetHeading - heading) * 9.0f * dT);
         tilt += (angleClamp(targetHeading - heading) - tilt) * 8.0f * dT;
-        transform.rotation = 
-            Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up)
-            * Quaternion.AngleAxis(-tilt * body.velocity.magnitude * 1.0f, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up);
     }
 
     void FixedUpdate() {
