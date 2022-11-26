@@ -651,7 +651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1966f5b232ef04daebc4af85d1e2e13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicalWorldMaterial: {fileID: 2100000, guid: e41b6e9a0eee2493d860bf11f9608722, type: 2}
   animator: {fileID: 5816139033071649966}
+  item: {fileID: 0}
 --- !u!1 &5949547004350438786
 GameObject:
   m_ObjectHideFlags: 0
