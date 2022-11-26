@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
                 sx = sx / mag;
                 sy = sy / mag;
             }
-            float SPEED = 15;
+            float SPEED = 22;
             float k = 7;
             running = true;
             Vector3 camDir = Camera.main.transform.forward;
