@@ -24,14 +24,14 @@ public class PlayerScript : MonoBehaviour
 
         // Jumping
         if (isJump()) {
-            body.velocity += Vector3.up * 25.0f;
+            body.velocity = new Vector3(body.velocity.x, 25.0f, body.velocity.z);
             animator.SetTrigger("jump");
         }
 
         animator.SetBool("running", running);
         heading = angleClamp(heading + angleClamp(targetHeading - heading) * 9.0f * dT);
         tilt += (angleClamp(targetHeading - heading) - tilt) * 8.0f * dT;
-        transform.rotation = Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up);
+        body.MoveRotation(Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up));
     }
 
     void FixedUpdate() {
@@ -51,19 +51,19 @@ public class PlayerScript : MonoBehaviour
             running = true;
             Vector3 camDir = Camera.main.transform.forward;
             float camAngle = Mathf.Atan2(camDir.x, camDir.z);
-            body.velocity +=  (
+            body.velocity += (
                 Quaternion.AngleAxis(camAngle * Mathf.Rad2Deg, Vector3.up) * new Vector3(sx * SPEED, 0, sy * SPEED)
                 - new Vector3(body.velocity.x, 0, body.velocity.z)
-            ) * k * dT;
+            ) * (k * dT);
             targetHeading = Mathf.Atan2(sx, sy) + camAngle;
         } else {
             float k = 8;
             running = false;
-            body.velocity += new Vector3(
-                (- body.velocity.x) * k * dT,
+            body.velocity += (new Vector3(
+                (- body.velocity.x),
                 0,
-                (- body.velocity.z) * k * dT
-            );
+                (- body.velocity.z)
+            ) * (k * dT));
         }
     }
 

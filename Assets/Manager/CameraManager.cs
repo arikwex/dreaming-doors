@@ -24,11 +24,14 @@ public class CameraManager : MonoBehaviour
         float dT = Time.deltaTime;
 
         Vector2 delta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        view += delta;
-        Quaternion currentView = Quaternion.Euler(-view.y * 10, view.x * 10, 0);
+        view += delta * 10.0f;
+        if (view.y > 60) { view = new Vector2(view.x, 60); }
+        if (view.y < -60) { view = new Vector2(view.x, -60); }
+        Quaternion currentView = Quaternion.Euler(-view.y, view.x, 0);
 
+        float adaptiveDistance = Mathf.Lerp(distance / 3.0f, distance * 1.3f, (60 - view.y) / 120.0f);
         cameraCenter += (target.position - cameraCenter) * 5.0f * dT;
-        cam.transform.position = cameraCenter - currentView * Vector3.forward * distance;
+        cam.transform.position = cameraCenter - currentView * Vector3.forward * adaptiveDistance;
         cam.transform.rotation = currentView;
     }
 }
