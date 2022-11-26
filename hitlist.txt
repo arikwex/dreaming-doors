@@ -1,6 +1,8 @@
 HITLIST
 =======
 
+- Camera needs phi axis limits
+
 - Art: Spray paint
 - Astronaut: Jet pack
 - Chef: Adds pots/pans platforms to world

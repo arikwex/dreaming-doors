@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate() {
         float dT = Time.fixedDeltaTime;
-        
+
         // Walking
         float sx = getX();
         float sy = getY();
@@ -51,11 +51,14 @@ public class PlayerScript : MonoBehaviour
             float SPEED = 15;
             float k = 7;
             running = true;
-            body.velocity += (
-                new Vector3(sx * SPEED, 0, sy * SPEED)
+            Vector3 camDir = Camera.main.transform.forward;
+            float camAngle = Mathf.Atan2(camDir.x, camDir.z);
+            Debug.Log(camAngle);
+            body.velocity +=  (
+                Quaternion.AngleAxis(camAngle * Mathf.Rad2Deg, Vector3.up) * new Vector3(sx * SPEED, 0, sy * SPEED)
                 - new Vector3(body.velocity.x, 0, body.velocity.z)
             ) * k * dT;
-            targetHeading = Mathf.Atan2(sx, sy);
+            targetHeading = Mathf.Atan2(sx, sy) + camAngle;
         } else {
             float k = 8;
             running = false;
