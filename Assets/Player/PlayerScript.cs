@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     bool running = false;
     float heading = 0;
     float targetHeading = 0;
+    float tilt = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class PlayerScript : MonoBehaviour
                 new Vector3(sx * SPEED, 0, sy * SPEED)
                 - new Vector3(body.velocity.x, 0, body.velocity.z)
             ) * k * dT;
-            targetHeading = Mathf.Atan2(-sy, sx);
+            targetHeading = Mathf.Atan2(sx, sy);
         } else {
             float k = 8;
             running = false;
@@ -46,18 +47,18 @@ public class PlayerScript : MonoBehaviour
             );
         }
         animator.SetBool("running", running);
-        heading = rotateTowards(targetHeading, heading, 5.0f * dT);
+        heading = angleClamp(heading + angleClamp(targetHeading - heading) * 9.0f * dT);
+        tilt += (angleClamp(targetHeading - heading) - tilt) * 8.0f * dT;
         transform.rotation = 
-            Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up);
-            // Quaternion.AngleAxis(10.0f, Vector3.forward);
+            Quaternion.AngleAxis(heading * Mathf.Rad2Deg, Vector3.up)
+            * Quaternion.AngleAxis(-tilt * body.velocity.magnitude, Vector3.forward);
     }
 
     Quaternion getHeading() {
         return Quaternion.AngleAxis(heading * Mathf.Rad2Deg + 90, Vector3.up);
     }
 
-    float rotateTowards(float a, float b, float maxT) {
-        float val = b + Mathf.Clamp(a - b, maxT, -maxT);
+    float angleClamp(float val) {
         if (val > Mathf.PI) {
             val -= Mathf.PI * 2;
         }
